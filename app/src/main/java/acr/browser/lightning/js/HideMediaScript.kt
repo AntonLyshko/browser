@@ -2,7 +2,7 @@ package acr.browser.lightning.js
 
 object HideMediaScript {
 
-    const val JS: String = """
+    val JS: String = """
         (function() {
             if (window.__hmInstalled) {
                 if (window.__hmEnsure) window.__hmEnsure();
