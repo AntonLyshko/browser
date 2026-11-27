@@ -32,7 +32,6 @@ import acr.browser.lightning.database.downloads.DownloadsRepository
 import acr.browser.lightning.database.history.HistoryRepository
 import acr.browser.lightning.di.BrowserScope
 import acr.browser.lightning.di.IncognitoMode
-import acr.browser.lightning.download.PendingDownload
 import acr.browser.lightning.favicon.FaviconModel
 import acr.browser.lightning.html.bookmark.BookmarkPageFactory
 import acr.browser.lightning.html.history.HistoryPageFactory
@@ -448,8 +447,7 @@ class BrowserPresenter @Inject constructor(
 
         tabJobs += browserCoroutineScope.launch {
             tab.downloadRequests().collectLatest {
-                navigator.download(it)
-                showSnackbar(resourceProvider.stringResource(R.string.download_pending))
+                showSnackbar("Скачивание отключено")
             }
         }
 
@@ -1476,18 +1474,7 @@ class BrowserPresenter @Inject constructor(
                 showSnackbar(resourceProvider.stringResource(R.string.message_link_copied))
             }
 
-            BrowserContract.ImageLongPressEvent.DOWNLOAD -> {
-                navigator.download(
-                    PendingDownload(
-                        url = longPress.hitUrl.orEmpty(),
-                        userAgent = null,
-                        contentDisposition = null,
-                        mimeType = null,
-                        contentLength = 0
-                    )
-                )
-                showSnackbar(resourceProvider.stringResource(R.string.download_pending))
-            }
+            BrowserContract.ImageLongPressEvent.DOWNLOAD -> Unit
         }
     }
 

@@ -38,9 +38,6 @@ fun LongPressImageLinkSheet(
             DialogItem(title = R.string.dialog_copy_link) {
                 onClick(BrowserContract.ImageLongPressEvent.COPY_LINK)
             },
-            DialogItem(title = R.string.dialog_download_image) {
-                onClick(BrowserContract.ImageLongPressEvent.DOWNLOAD)
-            }
         ),
         presenter = presenter
     )
